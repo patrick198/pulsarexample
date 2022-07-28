@@ -44,7 +44,7 @@ public class pulsarIOTConsumer {
                 .subscribe();
 //        consumer.seek(MessageId.earliest);
         
-        boolean receiveMsg = false;
+        boolean receiveMsg = true;
         do {
         	Message<?> message = consumer.receive();
         	
@@ -58,17 +58,29 @@ public class pulsarIOTConsumer {
             System.out.println("  payload:  " + printGenericRecord(msgPayload));
             
             consumer.acknowledge(message);
-            receiveMsg = false;
+//            receiveMsg = false;
 //            String[] fields = printGenericRecord(msgPayload).split(Pattern.quote("|"));
 //            System.out.println("Fields: " + fields[0] + " " + fields[1] + " " + fields[2]);
-            producer.send(printGenericRecord(msgPayload).getBytes());
+            System.out.println("Create new record: " + createIOTDeviceMessage(printGenericRecord(msgKey), printGenericRecord(msgPayload)));
+//            producer.send(printGenericRecord(msgPayload).getBytes());
+            producer.send(createIOTDeviceMessage(printGenericRecord(msgKey), printGenericRecord(msgPayload)).getBytes());
             producer.flush();
             
-        } while (!receiveMsg);
+        } while (receiveMsg);
 
         consumer.close();
 		producer.close();
 		pulsarClient.close();
+	}
+	public static String createIOTDeviceMessage(String key, String payload) {
+		 StringBuilder sb = new StringBuilder();
+		 String[] keyfield = key.split(Pattern.quote(":"));
+		 String[] payloadfield = payload.split(Pattern.quote(":"));
+		 
+		 sb.append(keyfield[1]);
+		 sb.append("|");
+		 sb.append(payloadfield[1]);
+		 return sb.toString();
 	}
     public static String printGenericRecord(GenericRecord genericRecord) {
         assert (genericRecord != null);

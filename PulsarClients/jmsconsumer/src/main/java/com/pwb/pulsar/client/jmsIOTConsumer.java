@@ -24,6 +24,7 @@ public class jmsIOTConsumer {
 		  configuration.put("brokerServiceUrl", "pulsar+ssl://pulsar-gcp-useast1.streaming.datastax.com:6651");
           configuration.put("authPlugin", "org.apache.pulsar.client.impl.auth.AuthenticationToken");
 	      configuration.put("authParams", YOUR_PULSAR_TOKEN);
+//	      configuration.put("jms.queueSubscriptionName", "jmsiotconsumer");
 
 		  PulsarConnectionFactory factory = new PulsarConnectionFactory(configuration);
 		  JMSContext context = factory.createContext();
@@ -38,9 +39,9 @@ public class jmsIOTConsumer {
 					byte[] content=new byte[(int)length];
 					((BytesMessage) msg).readBytes(content);
 					String sContent = new String(content,"UTF-8");
-	               System.out.printf("Consumer message: %s Length %d \n", sContent, length);
+	               System.out.printf("BytesMessage received, string contents: %s Length %d \n", sContent, length);
 			   } else {
-	           	System.out.printf("Consumer message: %s Length %d \n", ((PulsarTextMessage) msg).getText(), ((PulsarTextMessage) msg).getText().length());
+	           	System.out.printf("Text message: %s Length %d \n", ((PulsarTextMessage) msg).getText(), ((PulsarTextMessage) msg).getText().length());
 			   }
 	          msg.acknowledge();
 //			  msgReceive = false;
