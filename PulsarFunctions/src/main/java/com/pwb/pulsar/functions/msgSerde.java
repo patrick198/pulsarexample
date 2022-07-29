@@ -14,7 +14,6 @@ public class msgSerde implements SerDe<deviceHealthRecord> {
 
 	@Override
 	public byte[] serialize(deviceHealthRecord input) {
-
 		return "%s|%s".format(input.getDeviceID(), input.getBatteryState()).getBytes();		
 	}
 
