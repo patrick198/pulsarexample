@@ -13,9 +13,8 @@ import org.slf4j.Logger;
 public class healthMessageTransform implements Function<GenericRecord, String> {
     @Override
     public String process(GenericRecord input, Context context) {
-//        try {
     	Logger LOG = context.getLogger();
-    	
+   	
     	KeyValue<GenericRecord, GenericRecord> messageValue = (KeyValue<GenericRecord, GenericRecord>)input.getNativeObject();
 
     	LOG.info("Message received in Funcation and string is: " + input.toString());
