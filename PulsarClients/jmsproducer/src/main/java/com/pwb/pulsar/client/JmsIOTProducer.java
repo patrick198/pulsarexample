@@ -25,11 +25,11 @@ public class JmsIOTProducer {
 		JMSContext context = factory.createContext();
 		Destination destination = context.createQueue("persistent://cdcstreams/cdc-iot/devicestatus");
 
-		Message msg = context.createTextMessage("ID045|temp=89|battery=99|location=45.232");
+		Message msg = context.createTextMessage("ID022|temp=89|battery=5|location=45.232");
         context.createProducer().send(destination, msg);
         System.out.printf("Producer message sent\n");
-
         context.close();
+        System.exit(0);
 	}
 
 }
