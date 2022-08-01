@@ -28,7 +28,7 @@ public class jmsIOTConsumer {
 
 		  PulsarConnectionFactory factory = new PulsarConnectionFactory(configuration);
 		  JMSContext context = factory.createContext();
-		  Destination destination = context.createQueue("persistent://cdcstreams/cdc-iot/devicestatus");
+		  Destination destination = context.createQueue("persistent://cdcstreams/cdc-iot/devicehealth");
 		  JMSConsumer consumer = context.createConsumer(destination);
 		  boolean msgReceive = true;
 		  do {
