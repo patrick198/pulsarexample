@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.pwb.pulsar.functions</groupId>
   <artifactId>pwbpulsarfunctions</artifactId>
-  <version>0.0.48-SNAPSHOT</version>
+  <version>0.0.50-SNAPSHOT</version>
   <properties>
   <pulsar.version>2.10.1</pulsar.version>
   </properties>
