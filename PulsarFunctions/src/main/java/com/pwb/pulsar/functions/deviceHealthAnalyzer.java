@@ -14,18 +14,16 @@ public class deviceHealthAnalyzer implements  Function<byte[], deviceHealthRecor
 	public deviceHealthRecord process(byte[] input, Context context) throws Exception {
 		Logger LOG = context.getLogger();
 
-//		LOG.info("deviceHealthAnalyzer New raw msg input converted to string is: " + input + " Raw length: " + input.length());
 		msgSerde msgde =new msgSerde();
-		deviceHealthRecord devrec = msgde.deserialize(input);
-//		LOG.info("deviceHealthAnalyzer Function message received: " + input.getDeviceID() + " BatteryState " + input.getBatteryState());
-		LOG.info("deviceHealthAnalyzer Function message received: " + devrec.getDeviceID() + " BatteryState " + devrec.getBatteryState());
-		return devrec;
-	}
+		deviceHealthRecord devRecord = msgde.deserialize(input);
+		LOG.info("deviceHealthAnalyzer Function message received: " + devRecord.getDeviceID() + " BatteryState " + devRecord.getBatteryState());
 
-	public static deviceHealthRecord createIOTDeviceMessage(String payload) {
-		String[] payloadfield = payload.split(Pattern.quote("|"));
-		deviceHealthRecord devRecord = new deviceHealthRecord(payloadfield[0], payloadfield[1], payloadfield[2], payloadfield[3]);
-		return devRecord;
+		if(Integer.parseInt(devRecord.getBatteryState()) < 10) {
+       		LOG.warn("BatteryLevel is Bad: " + devRecord.getDeviceID() + " Level is: " + devRecord.getBatteryState());	
+       		return devRecord;
+       	} else {
+       		LOG.info("BatteryLevel is Good: " + devRecord.getDeviceID() + " Level is: " + devRecord.getBatteryState());
+       		return null;
+       	}
 	}
-
 }

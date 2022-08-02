@@ -17,28 +17,13 @@ public class cdcMessageTransform implements Function<GenericRecord, deviceHealth
    	
     	KeyValue<GenericRecord, GenericRecord> messageValue = (KeyValue<GenericRecord, GenericRecord>)input.getNativeObject();
 
-    	LOG.info("Message received in Funcation and string is: " + input.toString());
-    	LOG.info("Message received in Funcation and fields are: " + input.getFields().toString());
     	LOG.info("Key is: " + printGenericRecord(messageValue.getKey()));
     	LOG.info("Value is: " + printGenericRecord(messageValue.getValue()));
     	String newRecord = 
     			createIOTDeviceMessage(printGenericRecord(messageValue.getKey()), printGenericRecord(messageValue.getValue())
     	    	.toString());
-    	LOG.info("New record is: " + newRecord);
+    	LOG.info("cdcMessageTransform New record is: " + newRecord);
     	deviceHealthRecord devrec = createDeviceRecord(newRecord);
-    	LOG.info("DevRec.toString is: " + devrec.toString() + " ID: " + devrec.getDeviceID() +" Temp: " + devrec.getDeviceTemp() 
-    	+ " Battery: " + devrec.getBatteryState() + " Loc: " + devrec.getDeviceLocation());
-    	LOG.info("DevRec serial: " +
-    	"%s|%s|%s|%s".format(devrec.getDeviceID(),devrec.getDeviceTemp(),devrec.getBatteryState(),devrec.getDeviceLocation()));
-    	StringBuilder sb = new StringBuilder();
-    	sb.append(devrec.getDeviceID());
-    	sb.append("|");
-    	sb.append(devrec.getDeviceTemp());
-    	sb.append("|");
-    	sb.append(devrec.getBatteryState());
-    	sb.append("|");
-    	sb.append(devrec.getDeviceLocation());
-    	LOG.info("DevRec New serial: " + sb.toString());
     	return devrec;
 
  }
