@@ -20,7 +20,7 @@ public class PulsarIOTConsumer {
                 .build();
         // Create consumer on a topic with a subscription
         Consumer consumer = pulsarClient.newConsumer()
-                .topic("cdcstreams/cdc-iot/devicehealth-new")
+                .topic("cdcstreams/iotdevicemetrics/bad-devices")
                 .subscriptionName("test-sub")
                 .subscribe();
 
