@@ -23,9 +23,10 @@ public class JmsIOTProducer {
 
 		PulsarConnectionFactory factory = new PulsarConnectionFactory(configuration);
 		JMSContext context = factory.createContext();
-		Destination destination = context.createQueue("persistent://cdcstreams/cdc-iot/devicestatus");
+//		Destination destination = context.createQueue("persistent://cdcstreams/cdc-iot/devicestatus");
+		Destination destination = context.createQueue("persistent://cdcstreams/iotdevicemetrics/device-status");
 
-		Message msg = context.createTextMessage("ID022|temp=89|battery=5|location=45.232");
+		Message msg = context.createTextMessage("ID022|89|5|45.232");
         context.createProducer().send(destination, msg);
         System.out.printf("Producer message sent\n");
         context.close();
