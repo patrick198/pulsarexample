@@ -31,7 +31,7 @@ public class PulsarIOTConsumer {
 
             if(msg != null){
             	deviceHealthRecord devrec =  deserialize(msg.getData());
-                System.out.println("WARN Device Battery BAD state - DeviceID: " + devrec.getDeviceID() + " BatteryState: " + devrec.getBatteryState());
+                System.out.println("\n \n WARN Device Battery BAD state - DeviceID: " + devrec.getDeviceID() + " BatteryState: " + devrec.getBatteryState() + "\n \n");
                 // Acknowledge the message to remove it from the message backlog
                 consumer.acknowledge(msg);
  //               receivedMsg = true;
