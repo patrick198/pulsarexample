@@ -31,6 +31,3 @@ public class deviceHealthReview implements Function<String, String> {
 		return devRecord;
 	}    
 }
-
-// CREATE TABLE IF NOT EXISTS cdctest.tbl1 (key text PRIMARY KEY, c1 text);
-// INSERT INTO cdctest.tbl1 (key,c1) VALUES ('ID001','delivery-online');

@@ -65,8 +65,4 @@ public class cdcMessageTransform implements Function<GenericRecord, deviceHealth
 		return devRecord;
 	}
 }
-        
-
-// CREATE TABLE IF NOT EXISTS cdctest.tbl1 (key text PRIMARY KEY, c1 text);
-// INSERT INTO cdctest.tbl1 (key,c1) VALUES ('ID001','delivery-online');
-//INSERT INTO cdctest.tbl1 (key,c1) VALUES ('ID001','temp=89|battery=99|location=45.232');
+       
